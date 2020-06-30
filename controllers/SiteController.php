@@ -9,9 +9,11 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\RegistrationForm;
 
 class SiteController extends Controller
 {
+
     /**
      * {@inheritdoc}
      */
@@ -126,7 +128,12 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+           $email = "amaliyu70@gmail.com";
+           $phone = "+234-idont-like-phone-calls";
+           return $this->render('about',[
+              'email' => $email,
+              'phone' => $phone
+           ]);
     }
 
     public function actionSpeak($message = "default message") { 
@@ -150,4 +157,78 @@ class SiteController extends Controller
     public function actionTestWidget() { 
        return $this->render('testwidget'); 
     }
+//     public function actionTestGet() {
+//        $req = Yii::$app->request;
+//        if ($req->isAjax) {
+//           echo "the request is AJAX";
+//        }
+//        if ($req->isGet) {
+//           echo "the request is GET";
+//        }
+//        if ($req->isPost) {
+//           echo "the request is POST";
+//        }
+//        if ($req->isPut) {
+//           echo "the request is PUT";
+//        }
+// }
+    public function actionTestGet() {
+   //the URL without the host
+   var_dump(Yii::$app->request->url);
+   
+   //the whole URL including the host path
+   var_dump(Yii::$app->request->absoluteUrl);
+   
+   //the host of the URL
+   var_dump(Yii::$app->request->hostInfo);
+   
+   //the part after the entry script and before the question mark
+   var_dump(Yii::$app->request->pathInfo);
+   
+   //the part after the question mark
+   var_dump(Yii::$app->request->queryString);
+   
+   //the part after the host and before the entry script
+   var_dump(Yii::$app->request->baseUrl);
+   
+   //the URL without path info and query string
+   var_dump(Yii::$app->request->scriptUrl);
+   
+   //the host name in the URL
+   var_dump(Yii::$app->request->serverName);
+   
+   //the port used by the web server
+   var_dump(Yii::$app->request->serverPort);
+   exit;
+}
+    // public function actionTestResponse() {
+
+    //    //Yii::$app->response->headers->add('Pragma', 'no-cache');
+
+    //    throw new \yii\web\GoneHttpException;
+    // }
+
+public function actionTestResponse() {
+   \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+   return [
+      'id' => '1',
+      'name' => 'Ivan',
+      'age' => 24,
+      'country' => 'Poland',
+      'city' => 'Warsaw'
+   ];
+}
+
+public function actionMaintenance() {
+   echo "<h1>Maintenance</h1>";
+}
+
+public function actionRoutes() {
+   return $this->render('routes');
+}
+
+public function actionRegistration() {
+   $mRegistration = new RegistrationForm();
+   return $this->render('registration', ['model' => $mRegistration]);
+}
 }

@@ -11,7 +11,11 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    //'catchAll' => ['site/maintenance'], maintenacce mode
     'components' => [
+        'assetManager' => [
+            'appendTimestamp' => true,
+         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'KwKtLvi7V6Q6neABNeceAP8KPw6H6KuO',
@@ -43,17 +47,22 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
+        
+        // 'urlManager' => [
+        //     'enablePrettyUrl' => true,
+        //     'showScriptName' => false,
+        //     'rules' => [
+        //     ],
+        // ],
+        
     ],
+    'modules' => [
+         'hello' => [
+            'class' => 'app\modules\hello\Hello', 
+         ],
+      ],
     //changing the default controller 
-      'defaultRoute' => 'example', 
+      //'defaultRoute' => 'example', 
       'params' => $params, 
 ];
 
